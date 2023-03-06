@@ -3,8 +3,10 @@
 The Marketo Mobile SDK allows integration with Marketo Mobile Engagement (MME).
 
 ## Plugin Change Log
-v0.8.8 (May 25, 2022)
+v0.8.9 (March 06, 2023)
+- iOS changes only - Upgraded SDK minimum iOS version support to 12.0 & enhancements
 
+v0.8.8 (May 25, 2022)
 - Added support for Android API Level 31
 - Mnimum support Android API Level is now 21
 
@@ -41,6 +43,9 @@ v0.7.5 (January 4, 2018)
 - Minimum supported Cordova CLI version: 7.1.0
 
 ## iOS Change Log
+v0.8.0 (March 25, 2023)
+- Upgraded SDK minimum iOS version support to 12.0 & enhancements
+
 v0.7.9 (August 19, 2021)
 - Bug fixes & enhancements.
 

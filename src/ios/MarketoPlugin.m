@@ -69,23 +69,16 @@
 
 //if action is initializeMarketoPush then it will initialize the Push notification service for the app
 - (void) initializeMarketoPush:(CDVInvokedUrlCommand*)command{
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-    UIApplication *application = [UIApplication sharedApplication];
-    if ([application respondsToSelector:@selector (registerUserNotificationSettings:)])
-    {
-#ifdef __IPHONE_8_0
-        UIUserNotificationSettings *settings =
-        [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert) categories:nil];
-        [application registerUserNotificationSettings:settings];
-#endif
-    }
-    else
-    {
-        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
-        [application registerForRemoteNotificationTypes:myTypes];
-    }
-        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK ] callbackId:command.callbackId];
-    });
+
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error){
+        if(!error){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[UIApplication sharedApplication] registerForRemoteNotifications];
+            });
+        }
+    }];
+    
 }
 
 //if action is resume then it will send the resume action to MarketoSDK

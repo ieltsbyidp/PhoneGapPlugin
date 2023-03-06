@@ -13,24 +13,18 @@
 #define XCODE_VERSION_GREATER_THAN_OR_EQUAL_TO_8    __has_include(<UserNotifications/UserNotifications.h>)
 
 // To handle deeplink received from Marketo.
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
-    return [[Marketo sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+- (BOOL)application:(UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
+            return [[Marketo sharedInstance] application:app
+                                                 openURL:url
+                                       sourceApplication:nil
+                                              annotation:nil];
 }
-
-#ifdef __IPHONE_8_0
-- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
-{
-    // register to receive notifications
-    [application registerForRemoteNotifications];
-}
-
-#endif
 
 // Will update the Push Token received from apns.
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-#if XCODE_VERSION_GREATER_THAN_OR_EQUAL_TO_8
     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
     center.delegate = self;
     [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert)
@@ -39,27 +33,13 @@
                 NSLog(@"Local notification request authorization succeeded!");
             }
         }];
-#endif
     [[Marketo sharedInstance] registerPushDeviceToken:deviceToken];
 }
 
-// To handle Push notifications received from marketo.
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-{
-    [[Marketo sharedInstance] handlePushNotification:userInfo];
-}
-
-// To handle Local notifications received from marketo.
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
-{
-    [[Marketo sharedInstance] application:application didReceiveLocalNotification:notification];
-}
 
 -(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
     NSLog(@"Unable to get push token ******-> %@", error);
 }
-
-#if XCODE_VERSION_GREATER_THAN_OR_EQUAL_TO_8
 
 // The method will be called on the delegate only if the application is in the foreground. If the method is not implemented or the handler is not called in a timely manner then the notification will not be presented. The application can choose to have the notification presented as a sound, badge, alert and/or in the notification list. This decision should be based on whether the information in the notification is otherwise visible to the user.
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center
@@ -87,8 +67,5 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler{
     [[Marketo sharedInstance] handlePushNotification:userInfo];
 }
-
-#endif
-
 
 @end

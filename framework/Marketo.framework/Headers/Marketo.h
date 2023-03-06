@@ -103,20 +103,6 @@
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation;
 
 /*!
-* Override System's didReceiveLocalNotification method to Operate PushNotification
-* @param application The singleton app object
- * @param notification UILocalNotification object supplied by the source app.
-*/
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification;
-
-/*!
-* Override System's didReceiveLocalNotification method to Operate PushNotification
-* @param application The singleton app object
- * @param notification NSDictionary - A dictionary that contains information related to the remote notification, potentially including a badge number for the app icon, an alert sound, an alert message to display to the user, a notification identifier, and custom data.
-*/
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler;
-
-/*!
  * Override System's userNotificationCenter method to Operate PushNotification
  * @param center The UNUserNotificationCenter object supplied by the source app.
  * @param response UNNotificationResponse object supplied by the source app.
@@ -124,7 +110,7 @@
  */
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center
 didReceiveNotificationResponse:(UNNotificationResponse *)response
-         withCompletionHandler:(void(^)())completionHandler;
+         withCompletionHandler:(void(^)(void))completionHandler;
 /*!
  * Set security Signature for Authentication
  * @param token - The Security Token recived from client server
