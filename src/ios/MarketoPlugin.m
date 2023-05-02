@@ -52,13 +52,14 @@
         CDVPluginResult* pluginResult = nil;
         NSString* munchkinID = [command.arguments objectAtIndex:0];
         NSString* secretKey = [command.arguments objectAtIndex:1];
+        NSString* frameWorktype = [command.arguments objectAtIndex:2];
 
         if([self isObjectnull: munchkinID] || [self isObjectnull: secretKey]){
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"munchkinID or secretKey was null"];
             return;
         }
         if (secretKey != nil && munchkinID !=nil) {
-            [[Marketo sharedInstance] initializeWithMunchkinID:munchkinID appSecret:secretKey launchOptions:nil];
+            [[Marketo sharedInstance] initializeWithMunchkinID:munchkinID appSecret:secretKey mobileFrameworkType:frameWorktype launchOptions:nil];
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         } else {
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"munchkinID or secretKey was null"];
