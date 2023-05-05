@@ -95,6 +95,8 @@ v0.5.0
 - Bitcode refactor
 
 ## Android Change Log
+v0.8.9 (May 02, 2023)
+- Added support for capturing framework type & bug fixes.
 
 v0.8.7 (August 31, 2021)
 - Bug Fixes and feature enhancements.

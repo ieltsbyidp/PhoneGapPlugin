@@ -63,12 +63,13 @@ public class MarketoPlugin extends CordovaPlugin {
             if ("initialize".equals(action)) {
                 final String MUCHKIN_ID = args.optString(0);
                 final String SECRET_KEY = args.optString(1);
+                final String FRAMEWORK_TYPE = args.optString(2);
                 this.cordova.getThreadPool().execute(new Runnable() {
 
                     @Override
                     public void run() {
  			marketo.setPhonegapCurrentActivity(activityContext);
-                        marketo.initializeSDK(MUCHKIN_ID, SECRET_KEY);
+                        marketo.initializeSDK(MUCHKIN_ID, SECRET_KEY, FRAMEWORK_TYPE);
                         callbackContext.success();
                     }
                 });
