@@ -3,6 +3,19 @@
 The Marketo Mobile SDK allows integration with Marketo Mobile Engagement (MME).
 
 ## Plugin Change Log
+v0.9.0 (May 02, 2023)
+- Added parameter to capture the type of framework used for development (native, ionic, phonegap or reactnative)
+
+v0.8.9 (March 06, 2023)
+- iOS changes only - Upgraded SDK minimum iOS version support to 12.0 & enhancements
+
+v0.8.8 (May 25, 2022)
+- Added support for Android API Level 31
+- Mnimum support Android API Level is now 21
+
+v0.8.4 (March 22, 2021)
+- Fixed Bugs 
+
 v0.8.2 (March 16, 2020)
 - Fixed Bugs 
 
@@ -33,6 +46,15 @@ v0.7.5 (January 4, 2018)
 - Minimum supported Cordova CLI version: 7.1.0
 
 ## iOS Change Log
+v0.8.1 (May 02, 2023)
+- Added support for capturing framework type & bug fixes.
+
+v0.8.0 (March 25, 2023)
+- Upgraded SDK minimum iOS version support to 12.0 & enhancements
+
+v0.7.9 (August 19, 2021)
+- Bug fixes & enhancements.
+
 v0.7.8 (March 16, 2020)
 - Fixed unregistering push token issue.
 
@@ -73,6 +95,33 @@ v0.5.0
 - Bitcode refactor
 
 ## Android Change Log
+v0.8.9 (May 02, 2023)
+- Added support for capturing framework type & bug fixes.
+
+v0.8.7 (August 31, 2021)
+- Bug Fixes and feature enhancements.
+
+v0.8.2 (March 23, 2020)
+- Added Android https TLSv1.3 compliance
+
+v0.8.1 (Jul 18, 2019)
+- Fixed Bugs
+
+v0.8.0 (Mar 26, 2019)
+- Fixed Bugs
+
+v0.7.9 (Mar 04, 2019)
+- FCM changes to support custom Marketo Push Notification Receiver
+- Configured Push Notification Channel Name.
+- Fixed Bugs
+
+v0.7.8 (Dec 10, 2018)
+- Added Support for Firebase Cloud Messaging
+- Fixed Bugs
+
+v0.7.7 (May 25, 2018)
+- Added Support for Android API Level P (28)
+- Fixed Bugs
 
 v0.7.6 (January 18, 2018)
 - Added support for Android API Levels 26 and 27
@@ -212,7 +261,7 @@ sharedInstance.trackPushNotification(launchOptions)
 marketo.initialize(
   	function() { console.log("MarketoSDK Init done."); } ,
   	function(error) { console.log("an error occurred:" + error); },
-  	'YOUR_MUNCHKIN_ID', 'YOUR_SECRET_KEY'
+  	'YOUR_MUNCHKIN_ID', 'YOUR_SECRET_KEY', 'YOUR_MOBILE_FRAMEWORKTYPE'
 );
 
 // For session tracking, please add following.

@@ -2,7 +2,7 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         id="com.marketo.plugin"
-        version="0.8.0">
+        version="0.8.9">
  <name>MarketoPlugin</name>
  <description>Marketo plugin</description>
  <license>Apache</license>
@@ -31,7 +31,7 @@
   </config-file>
 
   <config-file target="AndroidManifest.xml" parent="/manifest/application">
-    <activity android:name="com.marketo.MarketoActivity" android:configChanges="orientation|screenSize">
+    <activity android:name="com.marketo.MarketoActivity" android:configChanges="orientation|screenSize" android:exported="true">
       <intent-filter android:label="MarketoActivity">
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>

@@ -52,13 +52,14 @@
         CDVPluginResult* pluginResult = nil;
         NSString* munchkinID = [command.arguments objectAtIndex:0];
         NSString* secretKey = [command.arguments objectAtIndex:1];
+        NSString* frameWorktype = [command.arguments objectAtIndex:2];
 
         if([self isObjectnull: munchkinID] || [self isObjectnull: secretKey]){
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"munchkinID or secretKey was null"];
             return;
         }
         if (secretKey != nil && munchkinID !=nil) {
-            [[Marketo sharedInstance] initializeWithMunchkinID:munchkinID appSecret:secretKey launchOptions:nil];
+            [[Marketo sharedInstance] initializeWithMunchkinID:munchkinID appSecret:secretKey mobileFrameworkType:frameWorktype launchOptions:nil];
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         } else {
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"munchkinID or secretKey was null"];
@@ -69,23 +70,16 @@
 
 //if action is initializeMarketoPush then it will initialize the Push notification service for the app
 - (void) initializeMarketoPush:(CDVInvokedUrlCommand*)command{
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-    UIApplication *application = [UIApplication sharedApplication];
-    if ([application respondsToSelector:@selector (registerUserNotificationSettings:)])
-    {
-#ifdef __IPHONE_8_0
-        UIUserNotificationSettings *settings =
-        [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert) categories:nil];
-        [application registerUserNotificationSettings:settings];
-#endif
-    }
-    else
-    {
-        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
-        [application registerForRemoteNotificationTypes:myTypes];
-    }
-        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK ] callbackId:command.callbackId];
-    });
+
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error){
+        if(!error){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[UIApplication sharedApplication] registerForRemoteNotifications];
+            });
+        }
+    }];
+    
 }
 
 //if action is resume then it will send the resume action to MarketoSDK
