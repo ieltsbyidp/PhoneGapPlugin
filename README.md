@@ -46,7 +46,7 @@ v0.7.5 (January 4, 2018)
 - Minimum supported Cordova CLI version: 7.1.0
 
 ## iOS Change Log
-v0.8.1 (May 02, 2023)
+v0.8.1 (June 05, 2023)
 - Added support for capturing framework type & bug fixes.
 
 v0.8.0 (March 25, 2023)
