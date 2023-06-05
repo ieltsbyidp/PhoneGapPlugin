@@ -18,8 +18,7 @@
             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
             return [[Marketo sharedInstance] application:app
                                                  openURL:url
-                                       sourceApplication:nil
-                                              annotation:nil];
+                                                 options:option];
 }
 
 // Will update the Push Token received from apns.
