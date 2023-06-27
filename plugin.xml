@@ -2,7 +2,7 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         id="com.marketo.plugin"
-        version="0.8.9">
+        version="0.9.1">
  <name>MarketoPlugin</name>
  <description>Marketo plugin</description>
  <license>Apache</license>
@@ -91,7 +91,7 @@
   <framework src="libsqlite3.dylib" />
 
   <!-- Marketo framework -->
-  <framework src="framework/Marketo.framework" custom="true" />
+  <framework src="framework/Marketo.xcframework" custom="true" />
   <framework src="framework/UserNotifications.framework" custom="false" />
 
   <resource-file src="framework/MKTResources.bundle"/>

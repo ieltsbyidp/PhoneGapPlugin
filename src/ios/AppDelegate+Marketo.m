@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate+Marketo.h"
-#import <Marketo/Marketo.h>
+#import "Marketo.h"
 @implementation AppDelegate (Marketo)
 
 #define XCODE_VERSION_GREATER_THAN_OR_EQUAL_TO_8    __has_include(<UserNotifications/UserNotifications.h>)
