@@ -4,7 +4,7 @@ The Marketo Mobile SDK allows integration with Marketo Mobile Engagement (MME).
 
 ## Plugin Change Log
 v0.9.2 (September 05, 2023)
-- iOS change only - XCFramework for multiple platforms.
+- Bug fixes & enhancements.
 
 v0.9.1 (June 27, 2023)
 - iOS change only - XCFramework for multiple platforms.
