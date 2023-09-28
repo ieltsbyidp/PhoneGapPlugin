@@ -3,6 +3,9 @@
 The Marketo Mobile SDK allows integration with Marketo Mobile Engagement (MME).
 
 ## Plugin Change Log
+v0.9.2 (September 05, 2023)
+- Bug fixes & enhancements.
+
 v0.9.1 (June 27, 2023)
 - iOS change only - XCFramework for multiple platforms.
 
@@ -49,6 +52,9 @@ v0.7.5 (January 4, 2018)
 - Minimum supported Cordova CLI version: 7.1.0
 
 ## iOS Change Log
+v0.8.4 (September 05, 2023)
+- Enhancements & bug fixes.
+
 v0.8.2 (June 27, 2023)
 - iOS change only - XCFramework for multiple platforms.
 
@@ -98,6 +104,9 @@ v0.5.0
 - Bitcode refactor
 
 ## Android Change Log
+v0.8.10 (September 05, 2023)
+- Enhancements & bug fixes.
+
 v0.8.9 (May 02, 2023)
 - Added support for capturing framework type & bug fixes.
 
