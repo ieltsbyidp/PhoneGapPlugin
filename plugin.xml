@@ -93,7 +93,7 @@
   <!-- Marketo framework -->
   <framework src="framework/Marketo.xcframework" custom="true" />
   <framework src="framework/UserNotifications.framework" custom="false" />
-
+  <framework src="Marketo-iOS-SDK" type="podspec" spec="0.8.4"/>
   <resource-file src="framework/MKTResources.bundle"/>
 
   <info>
