@@ -15,15 +15,18 @@ function readRootBuildGradle() {
 }
 
 /*
- * Added a dependency on 'com.google.gms' based on the position of the know 'com.android.tools.build' dependency in the build.gradle
+ * Added a dependency on 'com.google.gms' based on the position of the known 'com.android.tools.build' dependency in the build.gradle
  */
 function addDependencies(buildGradle) {
   // find the known line to match
   var match = buildGradle.match(/^(\s*)classpath 'com.android.tools.build(.*)/m);
+  if (!match) {
+    throw new Error("Could not find 'com.android.tools.build' in build.gradle");
+  }
   var whitespace = match[1];
 
   // modify the line to add the necessary dependencies
-  var googlePlayDependency = whitespace + "classpath \'com.google.gms:google-services:4.1.0\'" // google-services dependency from Marketo SDK;
+  var googlePlayDependency = whitespace + "classpath 'com.google.gms:google-services:4.1.0'"; // google-services dependency from Marketo SDK;
   var modifiedLine = match[0] + '\n' + googlePlayDependency;
 
   // modify the actual line
@@ -36,12 +39,15 @@ function addDependencies(buildGradle) {
 function addRepos(buildGradle) {
   // find the known line to match
   var match = buildGradle.match(/^(\s*)jcenter\(\)/m);
+  if (!match) {
+    throw new Error("Could not find 'jcenter()' in build.gradle");
+  }
   var whitespace = match[1];
 
   // modify the line to add the necessary repo
   // Crashlytics goes under buildscripts which is the first grouping in the file
-  var googlesMavenRepo = whitespace + "google()" // Google\'s Maven repository from Marketo SDK;
-  var modifiedLine = match[0] + '\n'+ googlesMavenRepo;
+  var googlesMavenRepo = whitespace + "google()"; // Google's Maven repository from Marketo SDK;
+  var modifiedLine = match[0] + '\n' + googlesMavenRepo;
 
   // modify the actual line
   buildGradle = buildGradle.replace(/^(\s*)jcenter\(\)/m, modifiedLine);
@@ -55,18 +61,13 @@ function addRepos(buildGradle) {
 
     // Add google() to the allprojects section of the string
     match = secondHalfOfFile.match(/^(\s*)jcenter\(\)/m);
-    modifiedLine = match[0] + '\n' + googlesMavenRepo;
-    // modify the part of the string that is after 'allprojects'
-    secondHalfOfFile = secondHalfOfFile.replace(/^(\s*)jcenter\(\)/m, modifiedLine);
+    if (match) {
+      modifiedLine = match[0] + '\n' + googlesMavenRepo;
+      secondHalfOfFile = secondHalfOfFile.replace(/^(\s*)jcenter\(\)/m, modifiedLine);
+    }
 
     // recombine the modified line
     buildGradle = firstHalfOfFile + secondHalfOfFile;
-  } else {
-    // this should not happen, but if it does, we should try to add the dependency to the buildscript
-    match = buildGradle.match(/^(\s*)jcenter\(\)/m);
-    modifiedLine = match[0] + '\n' + googlesMavenRepo;
-    // modify the part of the string that is after 'allprojects'
-    buildGradle = buildGradle.replace(/^(\s*)jcenter\(\)/m, modifiedLine);
   }
 
   return buildGradle;
@@ -84,7 +85,7 @@ module.exports = {
 
   modifyRootBuildGradle: function() {
     // be defensive and don't crash if the file doesn't exist
-    if (!rootBuildGradleExists) {
+    if (!rootBuildGradleExists()) { // Corrected: added parentheses
       return;
     }
 
@@ -101,7 +102,7 @@ module.exports = {
 
   restoreRootBuildGradle: function() {
     // be defensive and don't crash if the file doesn't exist
-    if (!rootBuildGradleExists) {
+    if (!rootBuildGradleExists()) { // Corrected: added parentheses
       return;
     }
 
