@@ -2,7 +2,7 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         id="com.marketo.plugin"
-        version="0.9.1">
+        version="0.9.4">
  <name>MarketoPlugin</name>
  <description>Marketo plugin</description>
  <license>Apache</license>
@@ -15,8 +15,8 @@
 
 <!-- android -->
 <platform name="android">
-  <hook type="after_plugin_install" src="scripts/android/after_plugin_install.js" />
-  <hook type="before_plugin_uninstall" src="scripts/android/before_plugin_uninstall.js" />
+  <hook type="after_plugin_install" src="Scripts/android/after_plugin_install.js" />
+  <hook type="before_plugin_uninstall" src="Scripts/android/before_plugin_uninstall.js" />
   <info>
     1.We are using application secret key ='$APPLICATION_SECRET_KEY' to configure your Marketo PhoneGap plugin for Android.
     2.Adding Marketo Activity, Marketo Boradcast Receiver.

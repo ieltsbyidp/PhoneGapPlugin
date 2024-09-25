@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <Cordova/CDV.h>
-#import "Marketo.h"
+#import <MarketoFramework/MarketoFramework.h>
 
 @interface MarketoPlugin : CDVPlugin
 
