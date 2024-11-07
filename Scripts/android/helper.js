@@ -29,10 +29,10 @@ function addDependencies(buildGradle) {
     return buildGradle.replace(/^(\s*)classpath 'com.android.tools.build(.*)/m, modifiedLine);
   } else {
     // If 'com.android.tools.build' isn't found, add it at the top of the dependencies section
-    return buildGradle.replace(
-      /dependencies {/,
-      `dependencies {\n        ${androidToolsDependency}\n        ${googlePlayDependency}`
-    );
+    // return buildGradle.replace(
+    //   /dependencies {/,
+    //   `dependencies {\n        ${androidToolsDependency}\n        ${googlePlayDependency}`
+    // );
   }
 }
 
