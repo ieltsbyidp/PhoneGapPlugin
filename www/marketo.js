@@ -48,7 +48,7 @@ var marketo = {
     initialize: function (success, fail, muchkin_id, secret_key, framework_type) {
         return cordova.exec( success, fail,
             "MarketoPlugin",
-            "initialize", [muchkin_id, secret_key, framework_type]);
+            "initialize", [framework_type,muchkin_id,secret_key]);
     },
 
     /**
