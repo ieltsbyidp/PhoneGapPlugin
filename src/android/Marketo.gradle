@@ -6,7 +6,8 @@ repositories{
 }
 
 dependencies {
-   compile(name:'MarketoRelease', ext:'aar')
+   //compile(name:'MarketoRelease', ext:'aar')
+  implementation(name:'MarketoRelease', ext:'aar')
 }
 
 android {
